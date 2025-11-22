@@ -1,7 +1,4 @@
 ---
-import PaperButton from '../components/PaperButton.astro';
-import PolaroidCard from '../components/PolaroidCard.astro';
-
 // Fetch experiences from backend API
 const response = await fetch('http://localhost:8002/api/experiences');
 const experiences = await response.json();
@@ -13,430 +10,406 @@ const experiences = await response.json();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stimulus Collective - Basel Experiences</title>
+    <meta name="description" content="Premium wine, chocolate, and art experiences in Basel. Small groups, expert guides, lasting memories.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Paper texture overlay -->
-    <div class="paper-texture"></div>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="logo">Stimulus Collective</h1>
+                <a href="https://wa.me/41XXXXXXXXX" class="header-cta">Book via WhatsApp</a>
+            </div>
+        </div>
+    </header>
 
-    <div class="scrapbook-page">
-        <!-- Hero Section -->
-        <section class="hero">
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
             <div class="hero-content">
-                <!-- Logo as stamp -->
-                <div class="stamp-logo">
-                    <h1 class="logo-text">Stimulus<br/>Collective</h1>
-                    <div class="stamp-circle"></div>
-                </div>
-
-                <h2 class="headline">
-                    <span class="hand-underline">Basel</span>, but not the usual tour
-                </h2>
-
-                <p class="tagline">
-                    Wine. Chocolate. Art. The kind of afternoons that stick with you.
-                </p>
-
-                <div class="cta-group">
-                    <PaperButton href="#experiences" variant="primary">
-                        See what we do →
-                    </PaperButton>
-                </div>
+                <h2 class="hero-title">Basel experiences that stick with you</h2>
+                <p class="hero-subtitle">Wine. Chocolate. Art. Small groups, expert guides, afternoons worth remembering.</p>
+                <a href="#experiences" class="btn btn-primary">Browse experiences</a>
             </div>
+        </div>
+    </section>
 
-            <!-- Floating Polaroids -->
-            <div class="floating-polaroids">
-                <PolaroidCard
-                    image="/images/wine-tour.jpg"
-                    caption="Wine & History ♥"
-                    rotation={-5}
-                />
-                <PolaroidCard
-                    image="/images/chocolate-tour.jpg"
-                    caption="Chocolate dreams"
-                    rotation={3}
-                />
-                <PolaroidCard
-                    image="/images/art-basel.jpg"
-                    caption="Art Basel"
-                    rotation={-2}
-                />
-            </div>
-        </section>
+    <!-- Experiences Grid -->
+    <section id="experiences" class="experiences">
+        <div class="container">
+            <h3 class="section-title">What we offer</h3>
 
-        <!-- Torn paper divider -->
-        <div class="torn-divider"></div>
-
-        <!-- Experiences Grid -->
-        <section id="experiences" class="experiences">
-            <h2 class="section-title">
-                <span class="handwritten">What we offer</span>
-            </h2>
-
-            <div class="experience-cards">
-                {experiences.map((exp, i) => (
-                    <div class="experience-card" style={`--delay: ${i * 0.1}s`}>
-                        <div class="card-inner">
-                            <span class="category-tag">{exp.category}</span>
-                            <h3>{exp.title}</h3>
-                            <div class="card-meta">
-                                <span class="duration">{exp.duration}</span>
-                                <span class="price">€{exp.price}</span>
-                            </div>
-                            <PaperButton href={`/experiences/${exp.slug}`} variant="secondary">
-                                Details →
-                            </PaperButton>
+            <div class="experience-grid">
+                {experiences.map((exp) => (
+                    <a href={`/experiences/${exp.slug}`} class="experience-card">
+                        <div class="experience-image">
+                            <img src={exp.hero_image} alt={exp.title} loading="lazy" />
+                            <span class="experience-category">{exp.category}</span>
                         </div>
-                        <!-- Paper clip decoration -->
-                        <div class="paper-clip"></div>
-                    </div>
+                        <div class="experience-content">
+                            <h4 class="experience-title">{exp.title}</h4>
+                            <div class="experience-meta">
+                                <span class="experience-duration">{exp.duration}</span>
+                                <span class="experience-price">€{exp.price}</span>
+                            </div>
+                        </div>
+                    </a>
                 ))}
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Footer -->
-        <footer class="footer">
-            <p>Made in Basel 🇨🇭</p>
-            <p class="footer-note">
-                Book via <a href="https://wa.me/41XXXXXXXXX">WhatsApp</a> •
-                Questions? Just ask.
-            </p>
-        </footer>
-    </div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p class="footer-text">Made in Basel</p>
+                <p class="footer-links">
+                    <a href="https://wa.me/41XXXXXXXXX">WhatsApp</a>
+                    <span>·</span>
+                    <a href="mailto:hello@stimuluscollective.com">Email</a>
+                </p>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
 
 <style>
+    /* ========================================================================
+       RESET & BASE
+       ======================================================================== */
     * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
     }
 
+    html {
+        scroll-behavior: smooth;
+    }
+
     body {
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        font-size: 16px;
         line-height: 1.6;
-        color: #2D2A26;
-        background: #F8F4F0;
-        overflow-x: hidden;
+        color: #1a1a1a;
+        background: #ffffff;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
     }
 
-    /* Paper texture overlay */
-    .paper-texture {
-        position: fixed;
-        inset: 0;
-        background-image:
-            repeating-linear-gradient(
-                0deg, transparent, transparent 2px,
-                rgba(0,0,0,0.015) 2px, rgba(0,0,0,0.015) 4px
-            ),
-            repeating-linear-gradient(
-                90deg, transparent, transparent 2px,
-                rgba(0,0,0,0.015) 2px, rgba(0,0,0,0.015) 4px
-            );
-        opacity: 0.5;
-        pointer-events: none;
-        z-index: 1000;
+    img {
+        max-width: 100%;
+        height: auto;
+        display: block;
     }
 
-    .scrapbook-page {
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    /* ========================================================================
+       LAYOUT
+       ======================================================================== */
+    .container {
         max-width: 1200px;
         margin: 0 auto;
-        padding: 2rem;
-        position: relative;
+        padding: 0 24px;
     }
 
-    /* Hero Section */
-    .hero {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 4rem;
-        padding: 4rem 0;
-        min-height: 80vh;
-        align-items: center;
+    /* ========================================================================
+       HEADER
+       ======================================================================== */
+    .header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
     }
 
-    .hero-content {
-        z-index: 2;
-    }
-
-    /* Stamp Logo */
-    .stamp-logo {
-        position: relative;
-        display: inline-block;
-        padding: 1.5rem;
-        margin-bottom: 2rem;
-    }
-
-    .stamp-circle {
-        position: absolute;
-        inset: 0;
-        border: 4px solid #E53935;
-        border-radius: 50%;
-        opacity: 0.6;
-        transform: rotate(-5deg);
-    }
-
-    .logo-text {
-        font-family: 'Caveat', cursive;
-        font-size: 2.5rem;
-        color: #E53935;
-        text-align: center;
-        line-height: 1.2;
-        position: relative;
-        z-index: 2;
-    }
-
-    .headline {
-        font-size: 3rem;
-        font-weight: 800;
-        color: #2D2A26;
-        margin-bottom: 1rem;
-        line-height: 1.2;
-    }
-
-    .hand-underline {
-        position: relative;
-        display: inline-block;
-    }
-
-    .hand-underline::after {
-        content: '';
-        position: absolute;
-        bottom: -4px;
-        left: -4px;
-        right: -4px;
-        height: 12px;
-        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 10'%3E%3Cpath d='M0,5 Q25,0 50,5 T100,5 T150,5 T200,5' stroke='%23E53935' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-        background-size: cover;
-        opacity: 0.8;
-    }
-
-    .tagline {
-        font-size: 1.25rem;
-        color: #666;
-        margin-bottom: 2rem;
-        max-width: 500px;
-    }
-
-    .cta-group {
-        display: flex;
-        gap: 1rem;
-        flex-wrap: wrap;
-    }
-
-    /* Floating Polaroids */
-    .floating-polaroids {
-        display: flex;
-        flex-direction: column;
-        gap: 2rem;
-        position: relative;
-    }
-
-    .floating-polaroids > :global(*) {
-        animation: float 6s ease-in-out infinite;
-    }
-
-    .floating-polaroids > :global(*:nth-child(2)) {
-        animation-delay: 1s;
-    }
-
-    .floating-polaroids > :global(*:nth-child(3)) {
-        animation-delay: 2s;
-    }
-
-    @keyframes float {
-        0%, 100% { transform: translateY(0) rotate(var(--rotation)); }
-        50% { transform: translateY(-10px) rotate(var(--rotation)); }
-    }
-
-    /* Torn divider */
-    .torn-divider {
-        height: 40px;
-        background: linear-gradient(
-            to bottom,
-            transparent 0%,
-            transparent 30%,
-            #F8F4F0 30%,
-            #F8F4F0 70%,
-            transparent 70%
-        );
-        margin: 3rem 0;
-        clip-path: polygon(
-            0% 30%, 3% 28%, 6% 32%, 9% 29%, 12% 33%,
-            15% 30%, 18% 34%, 21% 31%, 24% 35%, 27% 32%,
-            30% 30%, 33% 34%, 36% 31%, 39% 35%, 42% 32%,
-            45% 30%, 48% 33%, 51% 30%, 54% 34%, 57% 31%,
-            60% 35%, 63% 32%, 66% 30%, 69% 33%, 72% 31%,
-            75% 35%, 78% 32%, 81% 30%, 84% 34%, 87% 31%,
-            90% 33%, 93% 30%, 96% 32%, 99% 30%, 100% 30%,
-            100% 70%, 97% 68%, 94% 72%, 91% 69%, 88% 71%,
-            85% 68%, 82% 72%, 79% 69%, 76% 71%, 73% 68%,
-            70% 70%, 67% 72%, 64% 69%, 61% 71%, 58% 68%,
-            55% 70%, 52% 72%, 49% 69%, 46% 71%, 43% 68%,
-            40% 70%, 37% 72%, 34% 69%, 31% 71%, 28% 68%,
-            25% 70%, 22% 72%, 19% 69%, 16% 71%, 13% 68%,
-            10% 70%, 7% 72%, 4% 69%, 1% 71%, 0% 70%
-        );
-    }
-
-    /* Experiences Section */
-    .experiences {
-        padding: 4rem 0;
-    }
-
-    .section-title {
-        margin-bottom: 3rem;
-    }
-
-    .handwritten {
-        font-family: 'Caveat', cursive;
-        font-size: 3rem;
-        color: #2D2A26;
-        font-weight: 700;
-    }
-
-    .experience-cards {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 2rem;
-    }
-
-    .experience-card {
-        position: relative;
-        animation: fadeInUp 0.6s ease-out backwards;
-        animation-delay: var(--delay);
-    }
-
-    @keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(30px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    .card-inner {
-        background: #FFFAF8;
-        padding: 2rem;
-        border: 2px solid #E8E8E8;
-        box-shadow:
-            2px 2px 0 rgba(0,0,0,0.05),
-            4px 4px 8px rgba(0,0,0,0.1);
-        transition: transform 0.3s, box-shadow 0.3s;
-
-        /* Slightly irregular edges */
-        clip-path: polygon(
-            0% 2%, 100% 0%, 100% 98%, 0% 100%
-        );
-    }
-
-    .experience-card:hover .card-inner {
-        transform: translateY(-4px) rotate(0.5deg);
-        box-shadow:
-            4px 4px 0 rgba(0,0,0,0.05),
-            8px 8px 16px rgba(0,0,0,0.15);
-    }
-
-    .category-tag {
-        display: inline-block;
-        background: #FFF3F0;
-        color: #E53935;
-        padding: 0.25rem 0.75rem;
-        border-radius: 20px;
-        font-size: 0.75rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        margin-bottom: 1rem;
-    }
-
-    .experience-card h3 {
-        font-size: 1.5rem;
-        color: #2D2A26;
-        margin-bottom: 1rem;
-    }
-
-    .card-meta {
+    .header-content {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin: 1.5rem 0;
-        padding-top: 1rem;
-        border-top: 1px dashed #E8E8E8;
+        height: 80px;
     }
 
-    .duration {
-        color: #666;
-        font-size: 0.9rem;
+    .logo {
+        font-size: 20px;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+        color: #1a1a1a;
     }
 
-    .price {
-        font-size: 1.5rem;
+    .header-cta {
+        font-size: 15px;
+        font-weight: 500;
+        color: #1a1a1a;
+        padding: 10px 20px;
+        border: 1px solid rgba(0, 0, 0, 0.12);
+        border-radius: 8px;
+        transition: all 0.2s ease;
+    }
+
+    .header-cta:hover {
+        background: #1a1a1a;
+        color: #ffffff;
+        border-color: #1a1a1a;
+    }
+
+    /* ========================================================================
+       HERO
+       ======================================================================== */
+    .hero {
+        padding: 120px 0 80px;
+        background: linear-gradient(135deg, #fafafa 0%, #ffffff 100%);
+    }
+
+    .hero-content {
+        max-width: 640px;
+    }
+
+    .hero-title {
+        font-size: 56px;
         font-weight: 700;
-        color: #E53935;
+        line-height: 1.1;
+        letter-spacing: -0.03em;
+        color: #1a1a1a;
+        margin-bottom: 20px;
     }
 
-    /* Paper clip decoration */
-    .paper-clip {
+    .hero-subtitle {
+        font-size: 20px;
+        line-height: 1.5;
+        color: #666;
+        margin-bottom: 32px;
+    }
+
+    /* ========================================================================
+       BUTTONS
+       ======================================================================== */
+    .btn {
+        display: inline-block;
+        font-size: 16px;
+        font-weight: 500;
+        padding: 14px 28px;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+        cursor: pointer;
+        border: none;
+    }
+
+    .btn-primary {
+        background: #1a1a1a;
+        color: #ffffff;
+    }
+
+    .btn-primary:hover {
+        background: #000000;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    /* ========================================================================
+       EXPERIENCES SECTION
+       ======================================================================== */
+    .experiences {
+        padding: 80px 0 120px;
+    }
+
+    .section-title {
+        font-size: 32px;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+        color: #1a1a1a;
+        margin-bottom: 48px;
+    }
+
+    .experience-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+        gap: 32px;
+    }
+
+    .experience-card {
+        display: block;
+        border-radius: 12px;
+        overflow: hidden;
+        background: #ffffff;
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .experience-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+        border-color: rgba(0, 0, 0, 0.12);
+    }
+
+    .experience-image {
+        position: relative;
+        aspect-ratio: 4 / 3;
+        overflow: hidden;
+        background: #f5f5f5;
+    }
+
+    .experience-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .experience-card:hover .experience-image img {
+        transform: scale(1.05);
+    }
+
+    .experience-category {
         position: absolute;
-        top: -10px;
-        right: 20px;
-        width: 30px;
-        height: 50px;
-        border: 3px solid #999;
-        border-radius: 15px 15px 5px 5px;
-        transform: rotate(5deg);
-        opacity: 0.6;
+        top: 16px;
+        left: 16px;
+        font-size: 12px;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        padding: 6px 12px;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 6px;
+        color: #1a1a1a;
     }
 
-    /* Footer */
-    .footer {
-        text-align: center;
-        padding: 4rem 2rem 2rem;
-        margin-top: 4rem;
-        border-top: 2px dashed #E8E8E8;
+    .experience-content {
+        padding: 24px;
+    }
+
+    .experience-title {
+        font-size: 20px;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        color: #1a1a1a;
+        margin-bottom: 12px;
+    }
+
+    .experience-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 15px;
+    }
+
+    .experience-duration {
         color: #666;
     }
 
-    .footer-note {
-        margin-top: 1rem;
-        font-size: 0.9rem;
+    .experience-price {
+        font-weight: 600;
+        color: #1a1a1a;
     }
 
-    .footer a {
-        color: #E53935;
-        text-decoration: none;
+    /* ========================================================================
+       FOOTER
+       ======================================================================== */
+    .footer {
+        border-top: 1px solid rgba(0, 0, 0, 0.06);
+        padding: 48px 0;
+        background: #fafafa;
     }
 
-    .footer a:hover {
-        text-decoration: underline;
+    .footer-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 
-    /* Responsive */
+    .footer-text {
+        font-size: 14px;
+        color: #666;
+    }
+
+    .footer-links {
+        font-size: 14px;
+        color: #666;
+    }
+
+    .footer-links a {
+        color: #1a1a1a;
+        transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+        color: #000;
+    }
+
+    .footer-links span {
+        margin: 0 8px;
+        opacity: 0.3;
+    }
+
+    /* ========================================================================
+       RESPONSIVE
+       ======================================================================== */
     @media (max-width: 768px) {
         .hero {
+            padding: 80px 0 60px;
+        }
+
+        .hero-title {
+            font-size: 40px;
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+        }
+
+        .section-title {
+            font-size: 28px;
+        }
+
+        .experience-grid {
             grid-template-columns: 1fr;
-            gap: 2rem;
+            gap: 24px;
         }
 
-        .headline {
-            font-size: 2rem;
+        .footer-content {
+            flex-direction: column;
+            gap: 16px;
+            text-align: center;
         }
 
-        .floating-polaroids {
-            flex-direction: row;
-            justify-content: space-around;
-            overflow-x: auto;
+        .header-content {
+            height: 64px;
         }
 
-        .experience-cards {
-            grid-template-columns: 1fr;
+        .logo {
+            font-size: 18px;
+        }
+
+        .header-cta {
+            font-size: 14px;
+            padding: 8px 16px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .container {
+            padding: 0 20px;
+        }
+
+        .hero-title {
+            font-size: 32px;
+        }
+
+        .btn {
+            width: 100%;
+            text-align: center;
         }
     }
 </style>
