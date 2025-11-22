@@ -1,0 +1,56 @@
+[
+  {
+    "slug": "wine-cheese-basel",
+    "title": "Wine, Cheese & History Tour",
+    "category": "tours",
+    "duration": "2.5 hours",
+    "price": 65,
+    "group_size": "Max 10 people",
+    "languages": ["EN", "ES", "DE"],
+    "location": "Basel",
+    "hero_image": "/images/wine-tour.jpg",
+    "key_elements": [
+      "3 wine tastings (Swiss, Alsatian, German varietals)",
+      "Artisan cheese pairings from local affiniers",
+      "Historical walking tour through Old Town Basel",
+      "Expert sommelier guide with 15+ years experience",
+      "Small intimate groups for personal attention"
+    ]
+  },
+  {
+    "slug": "chocolate-tour-basel",
+    "title": "The Basel Chocolate Tour",
+    "category": "tours",
+    "duration": "2 hours",
+    "price": 45,
+    "group_size": "Max 12 people",
+    "languages": ["EN", "DE"],
+    "location": "Basel",
+    "hero_image": "/images/chocolate-tour.jpg",
+    "key_elements": [
+      "Visit 4 hidden artisan chocolate shops",
+      "Taste 8+ varieties of Swiss chocolate",
+      "Learn traditional chocolate-making techniques",
+      "Discover Basel's sweet history",
+      "No tourist traps - only local favorites"
+    ]
+  },
+  {
+    "slug": "art-basel-experience",
+    "title": "Art Basel Insider Experience",
+    "category": "art",
+    "duration": "3 hours",
+    "price": 75,
+    "group_size": "Max 8 people",
+    "languages": ["EN", "ES", "FR", "DE"],
+    "location": "Basel",
+    "hero_image": "/images/art-basel.jpg",
+    "key_elements": [
+      "Private gallery tours with art expert",
+      "Behind-the-scenes insights into Basel's art scene",
+      "Meet local artists in their studios",
+      "Understand contemporary art movements",
+      "Perfect for Art Basel visitors"
+    ]
+  }
+]
