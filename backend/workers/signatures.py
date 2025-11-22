@@ -1,16 +1,29 @@
 import dspy
 
 class GenerateExperienceContent(dspy.Signature):
-    """Generate compelling content for a Stimulus Collective experience.
+    """Generate unforgettable content for a Stimulus Collective experience.
 
-    Brand voice:
-    - Sensorial: Appeal to senses (taste, sight, sound, touch, thought)
-    - Human-driven: Emphasize personal connection, guides, small groups
-    - Creative: Unique angles, not generic tour descriptions
-    - Excellence: High quality, attention to detail
+    Brand voice - AUTHENTIC & SUBTLE:
+    - Sensorial but not overwrought: "the scent of aged cheese" not "intoxicating aromas filling your senses"
+    - Human without being sappy: Show warmth through specificity, not adjectives
+    - Intelligent casualness: Confident but never pretentious
+    - Unexpected details: The cobblestone sound, the sommelier's laugh, the 15-year cask
 
-    Goal: Make someone FEEL the experience and want to book immediately.
-    Write in an evocative, immersive style that transports the reader.
+    AVOID:
+    - Tourism clichés ("hidden gem", "off the beaten path", "like a local")
+    - Overwrought sensory language ("intoxicating", "mesmerizing", "unforgettable")
+    - Desperate urgency ("don't miss", "once in a lifetime")
+    - Generic superlatives ("best", "unique", "amazing")
+
+    EMBRACE:
+    - Specific, concrete details that paint a scene
+    - Moments of quiet observation
+    - Letting the experience speak for itself
+    - Subtle wit and intelligence
+    - Respect for the reader's taste
+
+    Tone: Like a Basel insider sharing a secret with a friend who appreciates good things.
+    Not trying to impress - just genuinely enthusiastic about what Basel offers.
     """
 
     # Inputs
@@ -23,9 +36,9 @@ class GenerateExperienceContent(dspy.Signature):
     key_elements: list[str] = dspy.InputField(desc="Key elements included in the experience")
 
     # Outputs
-    tagline: str = dspy.OutputField(desc="Evocative tagline (max 10 words, creates desire)")
-    description: str = dspy.OutputField(desc="Compelling description (200-250 words). Use sensory language. Paint a vivid picture. Make them feel like they're already there. End with emotional hook.")
-    highlights: list[str] = dspy.OutputField(desc="5-7 benefit-focused highlights (not just features - explain WHY it matters)")
+    tagline: str = dspy.OutputField(desc="Subtle, intelligent tagline (5-8 words). Avoid clichés. Be specific to Basel/this experience. Example: 'Three wines, one afternoon, zero pretense' not 'Discover Basel's Wine Scene'")
+    description: str = dspy.OutputField(desc="Evocative description (180-220 words). CRITICAL: Write like Hemingway, not a brochure. Short sentences OK. Concrete nouns, active verbs. Start mid-scene. NO words like: curated, journey, tapestry, treasure, gem, discover, indulge, savor (as verb). YES to: specific wine names, actual street names, real details. Example opening: 'The 2019 Chasselas is colder than it should be.' not 'As we embark on a journey...' Be direct. Be specific. Be real.")
+    highlights: list[str] = dspy.OutputField(desc="5-7 specific highlights. Focus on *what actually happens* not benefits. Example: 'Taste a 2019 Pinot from a family vineyard in Riehen' not 'Enjoy exclusive wine tastings'. Be concrete.")
 
     taste_score: int = dspy.OutputField(desc="Taste/gustatory stimulation score 1-10 (food/drink richness)")
     sight_score: int = dspy.OutputField(desc="Visual beauty score 1-10 (scenic views, aesthetics)")

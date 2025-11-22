@@ -1,0 +1,96 @@
+---
+interface Props {
+  href?: string;
+  variant?: 'primary' | 'secondary';
+  class?: string;
+}
+
+const { href, variant = 'primary', class: className = '' } = Astro.props;
+const Tag = href ? 'a' : 'button';
+---
+
+<Tag href={href} class={`paper-button ${variant} ${className}`}>
+  <span class="paper-button-text">
+    <slot />
+  </span>
+  <!-- Tape decoration -->
+  <div class="tape tape-left"></div>
+  <div class="tape tape-right"></div>
+</Tag>
+
+<style>
+  .paper-button {
+    position: relative;
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: #FFFAF8;
+    color: #E53935;
+    font-family: 'Caveat', cursive;
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+
+    /* Irregular hand-cut edges */
+    clip-path: polygon(
+      0% 3%, 2% 0%, 5% 4%, 12% 1%, 20% 3%,
+      35% 0%, 50% 2%, 65% 0%, 80% 3%,
+      95% 1%, 98% 4%, 100% 3%,
+      100% 97%, 98% 100%, 95% 96%, 80% 99%,
+      65% 97%, 50% 100%, 35% 98%, 20% 100%,
+      5% 97%, 2% 100%, 0% 97%
+    );
+
+    /* Paper lift shadow */
+    filter: drop-shadow(3px 3px 2px rgba(0,0,0,0.15));
+
+    transition: transform 0.2s ease, filter 0.2s ease;
+  }
+
+  .paper-button:hover {
+    transform: translateY(-4px) rotate(1deg);
+    filter: drop-shadow(6px 8px 4px rgba(0,0,0,0.2));
+  }
+
+  .paper-button:active {
+    transform: translateY(-1px) rotate(0deg);
+    filter: drop-shadow(2px 2px 1px rgba(0,0,0,0.1));
+  }
+
+  /* Tape decoration */
+  .tape {
+    position: absolute;
+    width: 40px;
+    height: 15px;
+    background: rgba(255, 235, 200, 0.7);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+  }
+
+  .tape-left {
+    top: -8px;
+    left: 10px;
+    transform: rotate(-5deg);
+  }
+  .tape-right {
+    top: -8px;
+    right: 10px;
+    transform: rotate(5deg);
+  }
+
+  /* Primary variant (red) */
+  .paper-button.primary {
+    background: #E53935;
+    color: #FFFAF8;
+  }
+
+  /* Secondary variant (cream) */
+  .paper-button.secondary {
+    background: #FFFAF8;
+    color: #E53935;
+    border: 2px solid #E53935;
+  }
+
+  /* Load Caveat font */
+  @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&display=swap');
+</style>

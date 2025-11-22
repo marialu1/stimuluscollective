@@ -1,14 +1,13 @@
 {
-  "tagline": "Savor Basel's Hidden Gems",
-  "description": "Imagine strolling through the charming streets of Old Town Basel, the scent of aged cheese and freshly poured wine filling the air. As you wander, the sound of cobblestones beneath your feet and the murmur of conversation from your small group of fellow travelers create a sense of intimacy and connection. Your expert sommelier guide weaves a narrative of Basel's history, pointing out hidden landmarks and sharing anecdotes about the city's past. At each stop, you'll be treated to a wine tasting, featuring varietals from Switzerland, Alsace, and Germany, paired with exquisite artisan cheeses from local affiniers. As the sun begins to set, casting a warm glow over the city, you'll feel as though you've uncovered the true essence of Basel. And as you raise a glass, surrounded by new friends and the gentle ambiance of the Old Town, you'll know that this is a memory to treasure.",
+  "tagline": "Wine and cheese in historic alleys.",
+  "description": "We stroll through the cobblestone streets of Old Town Basel, the scent of aged cheese wafting from a nearby fromagerie. Our sommelier guide, with over 15 years of experience, leads us to hidden gems, where Swiss, Alsatian, and German varietals await. On the Rheinweg, we pause at a charming wine bar, its wooden fa\u00e7ade worn smooth by time. Inside, the 2017 Pinot Noir from a family vineyard in Riehen is poured, its crisp notes complemented by an artisanal cheese from a local affinier. As we walk, the sommelier recounts tales of Basel's history, pointing out landmarks like the M\u00fcnster, its red sandstone glowing in the fading light. We continue our journey, tasting and learning, the sounds of the old town - the clang of tram bells, the murmur of the Rhine - accompanying us.",
   "highlights": [
-    "Indulge in 3 wine tastings, featuring unique varietals from the region",
-    "Savor artisan cheese pairings, crafted by local affiniers",
-    "Explore the historic Old Town with a knowledgeable guide",
-    "Enjoy personalized attention in a small, intimate group setting",
-    "Discover hidden gems and unexpected stories about Basel's past",
-    "Develop a deeper understanding of the region's wine and cheese culture",
-    "Create unforgettable memories with fellow travelers and your expert guide"
+    "Taste a 2017 Pinot Noir from a family vineyard in Riehen",
+    "Sample artisanal cheese from a local affinier on the Markthalle square",
+    "Explore the narrow streets of Old Town Basel with an expert guide",
+    "Visit a historic wine cellar beneath the streets of Basel",
+    "Learn about the history of Basel's wine trade along the Rhine",
+    "Enjoy a wine and cheese pairing in an intimate setting"
   ],
   "stimulus_scores": {
     "taste": 8,
