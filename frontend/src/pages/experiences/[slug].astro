@@ -2,7 +2,7 @@
 // Dynamic experience page with AI-generated content
 
 export async function getStaticPaths() {
-  const response = await fetch('http://localhost:8000/api/experiences');
+  const response = await fetch('http://localhost:8002/api/experiences');
   const experiences = await response.json();
 
   return experiences.map(exp => ({
@@ -11,7 +11,7 @@ export async function getStaticPaths() {
 }
 
 const { slug } = Astro.params;
-const response = await fetch(`http://localhost:8000/api/experiences/${slug}`);
+const response = await fetch(`http://localhost:8002/api/experiences/${slug}`);
 const exp = await response.json();
 ---
 

@@ -1,0 +1,20 @@
+{
+  "tagline": "Savor Basel's Hidden Gems",
+  "description": "Imagine strolling through the charming streets of Old Town Basel, the scent of aged cheese and freshly poured wine filling the air. As you wander, the sound of cobblestones beneath your feet and the murmur of conversation from your small group of fellow travelers create a sense of intimacy and connection. Your expert sommelier guide weaves a narrative of Basel's history, pointing out hidden landmarks and sharing anecdotes about the city's past. At each stop, you'll be treated to a wine tasting, featuring varietals from Switzerland, Alsace, and Germany, paired with exquisite artisan cheeses from local affiniers. As the sun begins to set, casting a warm glow over the city, you'll feel as though you've uncovered the true essence of Basel. And as you raise a glass, surrounded by new friends and the gentle ambiance of the Old Town, you'll know that this is a memory to treasure.",
+  "highlights": [
+    "Indulge in 3 wine tastings, featuring unique varietals from the region",
+    "Savor artisan cheese pairings, crafted by local affiniers",
+    "Explore the historic Old Town with a knowledgeable guide",
+    "Enjoy personalized attention in a small, intimate group setting",
+    "Discover hidden gems and unexpected stories about Basel's past",
+    "Develop a deeper understanding of the region's wine and cheese culture",
+    "Create unforgettable memories with fellow travelers and your expert guide"
+  ],
+  "stimulus_scores": {
+    "taste": 8,
+    "sight": 9,
+    "sound": 6,
+    "thought": 7,
+    "connect": 8
+  }
+}
