@@ -1,0 +1,451 @@
+---
+// Fetch experiences page content from backend API
+const response = await fetch('http://localhost:8002/api/pages/experiences');
+const data = await response.json();
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{data.title} - Stimulus Collective</title>
+    <meta name="description" content={data.subtitle}>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Caveat:wght@700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">Stimulus Collective</a>
+                <nav class="nav">
+                    <div class="nav-dropdown">
+                        <a href="/experiences" class="active">Experiences</a>
+                        <div class="dropdown-menu">
+                            <a href="/experiences">All experiences</a>
+                            <a href="/experiences#wine">Wine tours</a>
+                            <a href="/experiences#chocolate">Chocolate tours</a>
+                            <a href="/experiences#art">Art tours</a>
+                        </div>
+                    </div>
+                    <a href="/about">About</a>
+                    <a href="https://wa.me/41XXXXXXXXX" class="header-cta">Book via WhatsApp</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">{data.title}</h1>
+                <p class="hero-subtitle">{data.subtitle}</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experiences by Category -->
+    <section class="experiences">
+        <div class="container">
+            {Object.entries(data.categories).map(([category, experiences]) => (
+                <div class="category-section">
+                    <h2 class="category-title">{category}</h2>
+                    <div class="experience-grid">
+                        {experiences.map((exp) => (
+                            <a href={`/experiences/${exp.slug}`} class="experience-card">
+                                <div class="experience-image">
+                                    <img src={exp.hero_image} alt={exp.title} loading="lazy" />
+                                    <span class="experience-category">{category}</span>
+                                </div>
+                                <div class="experience-content">
+                                    <h3 class="experience-title">{exp.title}</h3>
+                                    <div class="experience-meta">
+                                        <span class="experience-duration">{exp.duration}</span>
+                                        <span class="experience-price">€{exp.price}</span>
+                                    </div>
+                                    <p class="experience-details">{exp.group_size} · {exp.location}</p>
+                                </div>
+                            </a>
+                        ))}
+                    </div>
+                </div>
+            ))}
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p class="footer-text">Made in Basel</p>
+                <p class="footer-links">
+                    <a href="https://wa.me/41XXXXXXXXX">WhatsApp</a>
+                    <span>·</span>
+                    <a href="mailto:hello@stimuluscollective.com">Email</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        font-size: 16px;
+        line-height: 1.6;
+        color: #2D2A26;
+        background: #FFB3C6;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 24px;
+    }
+
+    /* Header */
+    .header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(255, 179, 198, 0.95);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 80px;
+    }
+
+    .logo {
+        font-family: 'Caveat', cursive;
+        font-size: 38px;
+        font-weight: 700;
+        letter-spacing: 0;
+        color: #B71C1C;
+        text-shadow: 0.5px 0.5px 0 #B71C1C, -0.5px -0.5px 0 #B71C1C;
+        text-decoration: none;
+    }
+
+    .nav {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+    }
+
+    .nav-dropdown {
+        position: relative;
+    }
+
+    .nav a {
+        font-size: 15px;
+        font-weight: 500;
+        color: #2D2A26;
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }
+
+    .nav a:hover,
+    .nav a.active {
+        color: #B71C1C;
+    }
+
+    .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: transparent;
+        border: none;
+        padding: 12px 0;
+        min-width: 180px;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: all 0.3s ease;
+        z-index: 1000;
+    }
+
+    .nav-dropdown:hover .dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .dropdown-menu a {
+        display: block;
+        padding: 8px 20px;
+        font-size: 14px;
+        color: #2D2A26;
+        transition: all 0.2s ease;
+    }
+
+    .dropdown-menu a:hover {
+        color: #B71C1C;
+    }
+
+    .header-cta {
+        font-family: 'Caveat', cursive;
+        font-size: 20px;
+        font-weight: 700;
+        color: #FFB3C6 !important;
+        background: #B71C1C;
+        padding: 14px 28px;
+        border: none;
+        transition: all 0.2s ease;
+        transform: rotate(-1deg);
+        position: relative;
+        clip-path: polygon(
+            2% 0%, 8% 2%, 15% 0%, 22% 3%, 30% 1%, 38% 2%, 45% 0%, 52% 3%, 60% 1%, 68% 2%, 75% 0%, 82% 3%, 90% 1%, 96% 2%, 99% 0%,
+            100% 5%, 99% 12%, 100% 20%, 98% 28%, 100% 35%, 99% 42%, 100% 50%, 98% 58%, 100% 65%, 99% 72%, 100% 80%, 98% 88%, 100% 95%,
+            96% 98%, 90% 99%, 82% 97%, 75% 100%, 68% 98%, 60% 99%, 52% 97%, 45% 100%, 38% 98%, 30% 99%, 22% 97%, 15% 100%, 8% 98%, 2% 100%, 0% 99%,
+            0% 95%, 2% 88%, 0% 80%, 1% 72%, 0% 65%, 2% 58%, 0% 50%, 1% 42%, 0% 35%, 2% 28%, 0% 20%, 1% 12%, 0% 5%
+        );
+    }
+
+    .header-cta:hover {
+        background: #8B0000;
+        transform: rotate(0deg) translateY(-2px);
+        box-shadow: 0 4px 12px rgba(183, 28, 28, 0.3);
+    }
+
+    /* Hero */
+    .hero {
+        padding: 80px 0 60px;
+        background: #FFB3C6;
+    }
+
+    .hero-content {
+        max-width: 640px;
+    }
+
+    .hero-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 72px;
+        font-weight: 900;
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+        color: #B71C1C;
+        margin-bottom: 24px;
+    }
+
+    .hero-subtitle {
+        font-family: 'Caveat', cursive;
+        font-size: 32px;
+        font-weight: 700;
+        line-height: 1.4;
+        color: #B71C1C;
+        margin-bottom: 16px;
+    }
+
+    .experiences-count {
+        font-size: 16px;
+        color: #2D2A26;
+        font-weight: 500;
+    }
+
+    /* Experiences */
+    .experiences {
+        padding: 80px 0 120px;
+    }
+
+    .category-section {
+        margin-bottom: 80px;
+    }
+
+    .category-section:last-child {
+        margin-bottom: 0;
+    }
+
+    .category-title {
+        font-family: 'Caveat', cursive;
+        font-size: 48px;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        color: #B71C1C;
+        margin-bottom: 32px;
+        position: relative;
+        display: inline-block;
+    }
+
+    .category-title::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: #B71C1C;
+        opacity: 0.5;
+    }
+
+    .experience-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+        gap: 32px;
+    }
+
+    .experience-card {
+        display: block;
+        border-radius: 12px;
+        overflow: hidden;
+        background: #ffffff;
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        text-decoration: none;
+    }
+
+    .experience-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+        border-color: rgba(0, 0, 0, 0.12);
+    }
+
+    .experience-image {
+        position: relative;
+        aspect-ratio: 4 / 3;
+        overflow: hidden;
+        background: #f5f5f5;
+    }
+
+    .experience-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .experience-card:hover .experience-image img {
+        transform: scale(1.05);
+    }
+
+    .experience-category {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        font-size: 12px;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        padding: 6px 12px;
+        background: rgba(255, 179, 198, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 6px;
+        color: #D32F2F;
+    }
+
+    .experience-content {
+        padding: 24px;
+    }
+
+    .experience-title {
+        font-size: 20px;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        color: #2D2A26;
+        margin-bottom: 12px;
+    }
+
+    .experience-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 15px;
+        margin-bottom: 8px;
+    }
+
+    .experience-duration {
+        color: #666;
+    }
+
+    .experience-price {
+        font-weight: 600;
+        color: #D32F2F;
+    }
+
+    .experience-details {
+        font-size: 14px;
+        color: #999;
+    }
+
+    /* Footer */
+    .footer {
+        border-top: 1px solid rgba(0, 0, 0, 0.06);
+        padding: 48px 0;
+        background: #FFB3C6;
+    }
+
+    .footer-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .footer-text {
+        font-size: 14px;
+        color: #666;
+    }
+
+    .footer-links {
+        font-size: 14px;
+        color: #666;
+    }
+
+    .footer-links a {
+        color: #2D2A26;
+        transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+        color: #D32F2F;
+    }
+
+    .footer-links span {
+        margin: 0 8px;
+        opacity: 0.3;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .nav {
+            gap: 16px;
+        }
+
+        .nav a:not(.header-cta) {
+            font-size: 14px;
+        }
+
+        .hero-title {
+            font-size: 36px;
+        }
+
+        .experience-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .footer-content {
+            flex-direction: column;
+            gap: 16px;
+            text-align: center;
+        }
+    }
+</style>

@@ -21,272 +21,769 @@ const exp = await response.json();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{exp.title} - Stimulus Collective</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            line-height: 1.6;
-            color: #2D2A26;
-            background: #FFFAF8;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        .back-link {
-            display: inline-block;
-            margin-bottom: 2rem;
-            color: #E53935;
-            text-decoration: none;
-        }
-
-        .back-link:hover { text-decoration: underline; }
-
-        h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #2D2A26;
-            margin-bottom: 0.5rem;
-        }
-
-        .tagline {
-            font-size: 1.25rem;
-            color: #666;
-            font-style: italic;
-            margin-bottom: 1.5rem;
-        }
-
-        .meta {
-            display: flex;
-            gap: 1.5rem;
-            padding: 1rem 0;
-            border-bottom: 2px solid #F8E8E8;
-            margin-bottom: 2rem;
-            color: #666;
-        }
-
-        .meta span {
-            font-weight: 500;
-        }
-
-        .meta .price {
-            color: #E53935;
-            font-size: 1.25rem;
-            font-weight: 700;
-        }
-
-        .stimulus-scores {
-            background: white;
-            border: 1px solid #E8E8E8;
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 2rem 0;
-        }
-
-        .stimulus-scores h2 {
-            font-size: 1.25rem;
-            margin-bottom: 1.5rem;
-            text-align: center;
-            color: #2D2A26;
-        }
-
-        .scores-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 1rem;
-        }
-
-        .score {
-            text-align: center;
-        }
-
-        .score-bar {
-            height: 120px;
-            background: #F0F0F0;
-            border-radius: 6px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .score-fill {
-            background: linear-gradient(180deg, #E53935 0%, #C62828 100%);
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            transition: height 0.3s ease;
-        }
-
-        .score-label {
-            margin-top: 0.5rem;
-            font-size: 0.9rem;
-            font-weight: 500;
-            text-transform: capitalize;
-        }
-
-        .score-value {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #E53935;
-        }
-
-        .description {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            margin: 2rem 0;
-            white-space: pre-line;
-        }
-
-        .highlights {
-            background: white;
-            border: 1px solid #E8E8E8;
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 2rem 0;
-        }
-
-        .highlights h2 {
-            font-size: 1.25rem;
-            margin-bottom: 1rem;
-        }
-
-        .highlights ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .highlights li {
-            padding: 0.75rem 0;
-            padding-left: 2rem;
-            position: relative;
-        }
-
-        .highlights li:before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: #E53935;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-        .cta {
-            background: #E53935;
-            color: white;
-            padding: 1.25rem 2.5rem;
-            text-decoration: none;
-            border-radius: 8px;
-            font-size: 1.25rem;
-            font-weight: 600;
-            display: inline-block;
-            margin: 2rem 0;
-            transition: background 0.2s, transform 0.2s;
-        }
-
-        .cta:hover {
-            background: #C62828;
-            transform: translateY(-2px);
-        }
-
-        footer {
-            text-align: center;
-            padding: 2rem;
-            margin-top: 4rem;
-            border-top: 2px solid #F8E8E8;
-            color: #666;
-        }
-
-        @media (max-width: 768px) {
-            .scores-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-
-            .meta {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-        }
-    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Caveat:wght@700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <a href="/" class="back-link">← Back to Experiences</a>
-
-        <h1>{exp.title}</h1>
-        <p class="tagline">{exp.tagline}</p>
-
-        <div class="meta">
-            <span class="price">€{exp.price}/person</span>
-            <span>•</span>
-            <span>{exp.duration}</span>
-            <span>•</span>
-            <span>{exp.group_size}</span>
-            <span>•</span>
-            <span>{exp.languages.join(', ')}</span>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">Stimulus Collective</a>
+                <nav class="nav">
+                    <div class="nav-dropdown">
+                        <a href="/experiences">Experiences</a>
+                        <div class="dropdown-menu">
+                            <a href="/experiences">All experiences</a>
+                            <a href="/experiences#wine">Wine tours</a>
+                            <a href="/experiences#chocolate">Chocolate tours</a>
+                            <a href="/experiences#art">Art tours</a>
+                        </div>
+                    </div>
+                    <a href="/about">About</a>
+                    <a href="https://wa.me/41XXXXXXXXX" class="header-cta">Book via WhatsApp</a>
+                </nav>
+            </div>
         </div>
+    </header>
 
-        <div class="stimulus-scores">
-            <h2>Stimulus Scores™</h2>
-            <div class="scores-grid">
-                <div class="score">
-                    <div class="score-bar">
-                        <div class="score-fill" style={`height: ${exp.stimulus_scores.taste * 10}%`}></div>
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <a href="/experiences" class="back-link">← All Experiences</a>
+            <h1 class="hero-title">{exp.title}</h1>
+            <p class="tagline">{exp.tagline}</p>
+
+            <div class="meta">
+                <span class="price">€{exp.price}</span>
+                <span class="divider">•</span>
+                <span>{exp.duration}</span>
+                <span class="divider">•</span>
+                <span>{exp.group_size}</span>
+                <span class="divider">•</span>
+                <span>{exp.location}</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stimulus Scores -->
+    <section class="stimulus-section">
+        <div class="container">
+            <h2 class="section-title">Sensory Intensity</h2>
+            <p class="section-subtitle">Our artisanal gauge system</p>
+
+            <div class="gauges-container">
+                <div class="gauge-item">
+                    <div class="gauge-circle" data-score={exp.stimulus_scores.taste}>
+                        <svg viewBox="0 0 120 120">
+                            <circle cx="60" cy="60" r="54" fill="none" stroke="#F0F0F0" stroke-width="12"/>
+                            <circle class="gauge-progress" cx="60" cy="60" r="54" fill="none" stroke="#B71C1C" stroke-width="12" stroke-linecap="round"
+                                    transform="rotate(-90 60 60)"/>
+                        </svg>
+                        <div class="gauge-content">
+                            <span class="gauge-score">{exp.stimulus_scores.taste}</span>
+                            <span class="gauge-max">/10</span>
+                        </div>
                     </div>
-                    <div class="score-label">Taste</div>
-                    <div class="score-value">{exp.stimulus_scores.taste}/10</div>
+                    <p class="gauge-name">Taste</p>
                 </div>
-                <div class="score">
-                    <div class="score-bar">
-                        <div class="score-fill" style={`height: ${exp.stimulus_scores.sight * 10}%`}></div>
+
+                <div class="gauge-item">
+                    <div class="gauge-circle" data-score={exp.stimulus_scores.sight}>
+                        <svg viewBox="0 0 120 120">
+                            <circle cx="60" cy="60" r="54" fill="none" stroke="#F0F0F0" stroke-width="12"/>
+                            <circle class="gauge-progress" cx="60" cy="60" r="54" fill="none" stroke="#B71C1C" stroke-width="12" stroke-linecap="round"
+                                    transform="rotate(-90 60 60)"/>
+                        </svg>
+                        <div class="gauge-content">
+                            <span class="gauge-score">{exp.stimulus_scores.sight}</span>
+                            <span class="gauge-max">/10</span>
+                        </div>
                     </div>
-                    <div class="score-label">Sight</div>
-                    <div class="score-value">{exp.stimulus_scores.sight}/10</div>
+                    <p class="gauge-name">Sight</p>
                 </div>
-                <div class="score">
-                    <div class="score-bar">
-                        <div class="score-fill" style={`height: ${exp.stimulus_scores.sound * 10}%`}></div>
+
+                <div class="gauge-item">
+                    <div class="gauge-circle" data-score={exp.stimulus_scores.sound}>
+                        <svg viewBox="0 0 120 120">
+                            <circle cx="60" cy="60" r="54" fill="none" stroke="#F0F0F0" stroke-width="12"/>
+                            <circle class="gauge-progress" cx="60" cy="60" r="54" fill="none" stroke="#B71C1C" stroke-width="12" stroke-linecap="round"
+                                    transform="rotate(-90 60 60)"/>
+                        </svg>
+                        <div class="gauge-content">
+                            <span class="gauge-score">{exp.stimulus_scores.sound}</span>
+                            <span class="gauge-max">/10</span>
+                        </div>
                     </div>
-                    <div class="score-label">Sound</div>
-                    <div class="score-value">{exp.stimulus_scores.sound}/10</div>
+                    <p class="gauge-name">Sound</p>
                 </div>
-                <div class="score">
-                    <div class="score-bar">
-                        <div class="score-fill" style={`height: ${exp.stimulus_scores.thought * 10}%`}></div>
+
+                <div class="gauge-item">
+                    <div class="gauge-circle" data-score={exp.stimulus_scores.thought}>
+                        <svg viewBox="0 0 120 120">
+                            <circle cx="60" cy="60" r="54" fill="none" stroke="#F0F0F0" stroke-width="12"/>
+                            <circle class="gauge-progress" cx="60" cy="60" r="54" fill="none" stroke="#B71C1C" stroke-width="12" stroke-linecap="round"
+                                    transform="rotate(-90 60 60)"/>
+                        </svg>
+                        <div class="gauge-content">
+                            <span class="gauge-score">{exp.stimulus_scores.thought}</span>
+                            <span class="gauge-max">/10</span>
+                        </div>
                     </div>
-                    <div class="score-label">Thought</div>
-                    <div class="score-value">{exp.stimulus_scores.thought}/10</div>
+                    <p class="gauge-name">Thought</p>
                 </div>
-                <div class="score">
-                    <div class="score-bar">
-                        <div class="score-fill" style={`height: ${exp.stimulus_scores.connect * 10}%`}></div>
+
+                <div class="gauge-item">
+                    <div class="gauge-circle" data-score={exp.stimulus_scores.connect}>
+                        <svg viewBox="0 0 120 120">
+                            <circle cx="60" cy="60" r="54" fill="none" stroke="#F0F0F0" stroke-width="12"/>
+                            <circle class="gauge-progress" cx="60" cy="60" r="54" fill="none" stroke="#B71C1C" stroke-width="12" stroke-linecap="round"
+                                    transform="rotate(-90 60 60)"/>
+                        </svg>
+                        <div class="gauge-content">
+                            <span class="gauge-score">{exp.stimulus_scores.connect}</span>
+                            <span class="gauge-max">/10</span>
+                        </div>
                     </div>
-                    <div class="score-label">Connect</div>
-                    <div class="score-value">{exp.stimulus_scores.connect}/10</div>
+                    <p class="gauge-name">Connect</p>
                 </div>
             </div>
         </div>
+    </section>
 
-        <div class="description">
-            {exp.description}
+    <!-- Description -->
+    <section class="description-section">
+        <div class="container">
+            <div class="description">
+                {exp.description}
+            </div>
         </div>
+    </section>
 
-        <div class="highlights">
-            <h2>What's Included</h2>
-            <ul>
+    <!-- Highlights -->
+    <section class="highlights-section">
+        <div class="container">
+            <h2 class="section-title">What's Included</h2>
+            <ul class="highlights-list">
                 {exp.highlights.map(h => <li>{h}</li>)}
             </ul>
         </div>
+    </section>
 
-        <a href={exp.whatsapp_url} class="cta" target="_blank" rel="noopener noreferrer">
-            Book via WhatsApp →
-        </a>
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="container">
+            <a href={exp.whatsapp_url} class="cta-button" target="_blank" rel="noopener noreferrer">
+                Book this experience →
+            </a>
+        </div>
+    </section>
 
-        <footer>
-            <p>Made with ♥ in Basel 🇨🇭</p>
-        </footer>
-    </div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <h4 class="footer-title">About Stimulus Collective</h4>
+                    <p class="footer-description">Small-group experiences in Basel. Wine, chocolate, and art tours led by people who actually know their stuff. Max 8 people. No megaphones.</p>
+                    <a href="/about" class="footer-link">Learn more →</a>
+                </div>
+
+                <div class="footer-links-section">
+                    <h4 class="footer-title">Experiences</h4>
+                    <ul class="footer-list">
+                        <li><a href="/experiences">All experiences</a></li>
+                        <li><a href="/experiences#wine">Wine tours</a></li>
+                        <li><a href="/experiences#chocolate">Chocolate tours</a></li>
+                        <li><a href="/experiences#art">Art tours</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-contact">
+                    <h4 class="footer-title">Get in touch</h4>
+                    <p class="footer-text">Made in Basel</p>
+                    <div class="footer-links">
+                        <a href="https://wa.me/41XXXXXXXXX">WhatsApp</a>
+                        <a href="mailto:hello@stimuluscollective.com">Email</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2025 Stimulus Collective. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Animate circular progress gauges
+        document.addEventListener('DOMContentLoaded', () => {
+            const gauges = document.querySelectorAll('.gauge-circle');
+
+            gauges.forEach((gauge, index) => {
+                const score = parseFloat(gauge.dataset.score);
+                const circle = gauge.querySelector('.gauge-progress');
+                const radius = 54;
+                const circumference = 2 * Math.PI * radius;
+
+                circle.style.strokeDasharray = circumference;
+                circle.style.strokeDashoffset = circumference;
+
+                setTimeout(() => {
+                    const offset = circumference - (score / 10) * circumference;
+                    circle.style.strokeDashoffset = offset;
+                }, index * 150);
+            });
+        });
+    </script>
+
+    <script>
+        // Animate gauges on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const gauges = document.querySelectorAll('.gauge-svg');
+
+            gauges.forEach((gauge, index) => {
+                const score = parseFloat(gauge.dataset.score);
+                const label = gauge.dataset.label;
+
+                // Add scale marks and numbers
+                const scaleMarks = gauge.querySelector('.scale-marks');
+                const scaleNumbers = gauge.querySelector('.scale-numbers');
+
+                for (let i = 0; i <= 10; i++) {
+                    const angle = -90 + (i * 18); // 180 degrees total, 11 marks (0-10)
+                    const radians = (angle * Math.PI) / 180;
+
+                    // Tick marks
+                    const x1 = 100 + 60 * Math.cos(radians);
+                    const y1 = 95 + 60 * Math.sin(radians);
+                    const x2 = 100 + 68 * Math.cos(radians);
+                    const y2 = 95 + 68 * Math.sin(radians);
+
+                    const mark = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                    mark.setAttribute('x1', x1);
+                    mark.setAttribute('y1', y1);
+                    mark.setAttribute('x2', x2);
+                    mark.setAttribute('y2', y2);
+                    scaleMarks.appendChild(mark);
+
+                    // Numbers (only 0, 5, 10)
+                    if (i % 5 === 0) {
+                        const numX = 100 + 78 * Math.cos(radians);
+                        const numY = 95 + 78 * Math.sin(radians) + 3;
+
+                        const num = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                        num.setAttribute('x', numX);
+                        num.setAttribute('y', numY);
+                        num.setAttribute('text-anchor', 'middle');
+                        num.textContent = i;
+                        scaleNumbers.appendChild(num);
+                    }
+                }
+
+                // Animate after a delay
+                setTimeout(() => {
+                    // Animate needle
+                    const needle = gauge.querySelector('.gauge-needle');
+                    const needleAngle = -90 + (score * 18); // 0-10 scale to -90 to +90 degrees
+                    needle.style.transform = `rotate(${needleAngle}deg)`;
+
+                    // Animate arc fill
+                    const fill = gauge.querySelector('.gauge-fill');
+                    const arcLength = 204;
+                    const fillAmount = arcLength - (arcLength * (score / 10));
+                    fill.style.strokeDashoffset = fillAmount;
+
+                    // Show value with counter animation
+                    const valueText = gauge.querySelector('.gauge-value');
+                    let currentValue = 0;
+                    const duration = 1500;
+                    const increment = score / (duration / 16);
+
+                    const counter = setInterval(() => {
+                        currentValue += increment;
+                        if (currentValue >= score) {
+                            currentValue = score;
+                            clearInterval(counter);
+                        }
+                        valueText.textContent = currentValue.toFixed(1);
+                    }, 16);
+                }, index * 200); // Stagger animation
+            });
+        });
+    </script>
 </body>
 </html>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        font-size: 16px;
+        line-height: 1.6;
+        color: #2D2A26;
+        background: #FFB3C6;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 24px;
+    }
+
+    /* Header */
+    .header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(255, 179, 198, 0.95);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 80px;
+    }
+
+    .logo {
+        font-family: 'Caveat', cursive;
+        font-size: 38px;
+        font-weight: 700;
+        letter-spacing: 0;
+        color: #B71C1C;
+        text-shadow: 0.5px 0.5px 0 #B71C1C, -0.5px -0.5px 0 #B71C1C;
+        text-decoration: none;
+    }
+
+    .nav {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+    }
+
+    .nav-dropdown {
+        position: relative;
+    }
+
+    .nav a {
+        font-size: 15px;
+        font-weight: 500;
+        color: #2D2A26;
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }
+
+    .nav a:hover {
+        color: #B71C1C;
+    }
+
+    .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: transparent;
+        border: none;
+        padding: 12px 0;
+        min-width: 180px;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: all 0.3s ease;
+        z-index: 1000;
+    }
+
+    .nav-dropdown:hover .dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .dropdown-menu a {
+        display: block;
+        padding: 8px 20px;
+        font-size: 14px;
+        color: #2D2A26;
+        transition: all 0.2s ease;
+    }
+
+    .dropdown-menu a:hover {
+        color: #B71C1C;
+    }
+
+    .header-cta {
+        font-family: 'Caveat', cursive;
+        font-size: 20px;
+        font-weight: 700;
+        color: #FFB3C6 !important;
+        background: #B71C1C;
+        padding: 14px 28px;
+        border: none;
+        transition: all 0.2s ease;
+        transform: rotate(-1deg);
+        position: relative;
+        clip-path: polygon(
+            2% 0%, 8% 2%, 15% 0%, 22% 3%, 30% 1%, 38% 2%, 45% 0%, 52% 3%, 60% 1%, 68% 2%, 75% 0%, 82% 3%, 90% 1%, 96% 2%, 99% 0%,
+            100% 5%, 99% 12%, 100% 20%, 98% 28%, 100% 35%, 99% 42%, 100% 50%, 98% 58%, 100% 65%, 99% 72%, 100% 80%, 98% 88%, 100% 95%,
+            96% 98%, 90% 99%, 82% 97%, 75% 100%, 68% 98%, 60% 99%, 52% 97%, 45% 100%, 38% 98%, 30% 99%, 22% 97%, 15% 100%, 8% 98%, 2% 100%, 0% 99%,
+            0% 95%, 2% 88%, 0% 80%, 1% 72%, 0% 65%, 2% 58%, 0% 50%, 1% 42%, 0% 35%, 2% 28%, 0% 20%, 1% 12%, 0% 5%
+        );
+    }
+
+    .header-cta:hover {
+        background: #8B0000;
+        transform: rotate(0deg) translateY(-2px);
+        box-shadow: 0 4px 12px rgba(183, 28, 28, 0.3);
+    }
+
+    /* Hero */
+    .hero {
+        padding: 80px 0 60px;
+        background: #FFB3C6;
+    }
+
+    .back-link {
+        display: inline-block;
+        font-family: 'Caveat', cursive;
+        font-size: 20px;
+        font-weight: 700;
+        color: #B71C1C;
+        text-decoration: none;
+        margin-bottom: 24px;
+        transition: transform 0.2s ease;
+    }
+
+    .back-link:hover {
+        transform: translateX(-4px);
+    }
+
+    .hero-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 72px;
+        font-weight: 900;
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+        color: #B71C1C;
+        margin-bottom: 20px;
+        max-width: 800px;
+    }
+
+    .tagline {
+        font-family: 'Caveat', cursive;
+        font-size: 32px;
+        font-weight: 700;
+        line-height: 1.4;
+        color: #2D2A26;
+        margin-bottom: 32px;
+        max-width: 700px;
+    }
+
+    .meta {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        flex-wrap: wrap;
+        font-size: 18px;
+    }
+
+    .meta .price {
+        font-family: 'Caveat', cursive;
+        font-size: 36px;
+        font-weight: 700;
+        color: #B71C1C;
+    }
+
+    .meta .divider {
+        color: #999;
+    }
+
+    /* Sensory Intensity Gauges */
+    .stimulus-section {
+        padding: 80px 0;
+        background: #FFB3C6;
+    }
+
+    .section-title {
+        font-family: 'Caveat', cursive;
+        font-size: 48px;
+        font-weight: 700;
+        color: #B71C1C;
+        margin-bottom: 12px;
+        text-align: center;
+    }
+
+    .section-subtitle {
+        font-size: 16px;
+        color: #666;
+        text-align: center;
+        margin-bottom: 48px;
+        font-style: italic;
+    }
+
+    .gauges-container {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        gap: 32px;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 24px;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+    }
+
+    .gauge-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .gauge-circle {
+        position: relative;
+        width: 120px;
+        height: 120px;
+    }
+
+    .gauge-circle svg {
+        width: 100%;
+        height: 100%;
+        transform: rotate(0deg);
+    }
+
+    .gauge-progress {
+        transition: stroke-dashoffset 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .gauge-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+    }
+
+    .gauge-score {
+        font-family: 'Playfair Display', serif;
+        font-size: 28px;
+        font-weight: 700;
+        color: #B71C1C;
+        line-height: 1;
+    }
+
+    .gauge-max {
+        font-family: 'Inter', sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        color: #999;
+    }
+
+    .gauge-name {
+        font-family: 'Caveat', cursive;
+        font-size: 20px;
+        font-weight: 700;
+        color: #2D2A26;
+        margin: 0;
+    }
+
+    /* Description */
+    .description-section {
+        padding: 80px 0;
+        background: #FFB3C6;
+    }
+
+    .description {
+        font-size: 20px;
+        line-height: 1.8;
+        max-width: 800px;
+        margin: 0 auto;
+        white-space: pre-line;
+    }
+
+    /* Highlights */
+    .highlights-section {
+        padding: 80px 0;
+        background: #FFB3C6;
+    }
+
+    .highlights-list {
+        list-style: none;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0;
+    }
+
+    .highlights-list li {
+        padding: 16px 0;
+        padding-left: 48px;
+        position: relative;
+        font-size: 18px;
+        line-height: 1.6;
+    }
+
+    .highlights-list li:before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: #B71C1C;
+        font-weight: bold;
+        font-size: 28px;
+        font-family: 'Caveat', cursive;
+    }
+
+    /* CTA */
+    .cta-section {
+        padding: 80px 0;
+        background: #FFB3C6;
+        text-align: center;
+    }
+
+    .cta-button {
+        font-family: 'Caveat', cursive;
+        font-size: 32px;
+        font-weight: 700;
+        color: #B71C1C;
+        background: transparent;
+        padding: 0;
+        text-decoration: underline;
+        text-decoration-thickness: 2px;
+        text-underline-offset: 4px;
+        display: inline-block;
+        transition: all 0.2s ease;
+    }
+
+    .cta-button:hover {
+        color: #8B0000;
+        text-decoration-thickness: 3px;
+    }
+
+    /* Footer */
+    .footer {
+        background: #FFB3C6;
+        padding: 60px 0 24px;
+        border-top: none;
+    }
+
+    .footer-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: 48px;
+        margin-bottom: 48px;
+    }
+
+    .footer-title {
+        font-family: 'Caveat', cursive;
+        font-size: 28px;
+        font-weight: 700;
+        color: #B71C1C;
+        margin-bottom: 16px;
+    }
+
+    .footer-description {
+        color: #666;
+        line-height: 1.6;
+        margin-bottom: 16px;
+    }
+
+    .footer-link {
+        font-family: 'Caveat', cursive;
+        font-size: 20px;
+        font-weight: 700;
+        color: #B71C1C;
+        text-decoration: none;
+        transition: transform 0.2s ease;
+        display: inline-block;
+    }
+
+    .footer-link:hover {
+        transform: translateX(4px);
+    }
+
+    .footer-list {
+        list-style: none;
+    }
+
+    .footer-list li {
+        margin-bottom: 8px;
+    }
+
+    .footer-list a {
+        color: #666;
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }
+
+    .footer-list a:hover {
+        color: #B71C1C;
+    }
+
+    .footer-text {
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 12px;
+    }
+
+    .footer-links {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .footer-links a {
+        color: #666;
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+        color: #B71C1C;
+    }
+
+    .footer-bottom {
+        text-align: center;
+        padding-top: 24px;
+        border-top: 1px solid rgba(0, 0, 0, 0.06);
+        color: #999;
+        font-size: 14px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .hero-title {
+            font-size: 48px;
+        }
+
+        .tagline {
+            font-size: 24px;
+        }
+
+        .gauges-container {
+            justify-content: flex-start;
+            padding: 0 16px;
+        }
+
+        .gauge-svg {
+            width: 140px;
+        }
+
+        .meta {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 8px;
+        }
+    }
+</style>

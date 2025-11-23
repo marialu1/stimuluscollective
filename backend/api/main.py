@@ -118,6 +118,63 @@ def get_experience(slug: str):
         print(f"❌ Error generating AI content: {e}")
         raise HTTPException(status_code=500, detail=f"Error generating content: {str(e)}")
 
+@app.get("/api/about")
+def get_about():
+    """Get About page content."""
+    return {
+        "title": "About Stimulus Collective",
+        "subtitle": "Basel experiences that stick with you",
+        "description": """We're not a tour company. We're Basel insiders who got tired of watching visitors
+        do the same predictable things. So we started creating small-group experiences that tap into what
+        makes this city genuinely interesting: the wine that sommeliers actually drink, the chocolate shops
+        locals visit, the art that challenges rather than decorates.
+
+        Each experience is capped at 8 people. Each one is led by someone who knows their subject deeply.
+        And each one is designed to give you stories worth repeating.""",
+        "values": [
+            {
+                "title": "Small Groups Only",
+                "description": "8 people maximum. No megaphones, no rushing, no getting lost in the crowd."
+            },
+            {
+                "title": "Expert Guides",
+                "description": "Sommeliers, chocolatiers, artists. People who live and breathe their craft."
+            },
+            {
+                "title": "Sensorial Focus",
+                "description": "We measure experiences across 5 dimensions: Taste, Sight, Sound, Thought, Connect."
+            }
+        ],
+        "whatsapp_url": "https://wa.me/41XXXXXXXXX?text=Hi!%20I'd%20like%20to%20know%20more%20about%20Stimulus%20Collective"
+    }
+
+@app.get("/api/pages/experiences")
+def get_experiences_page():
+    """Get Experiences page with all experiences grouped by category."""
+
+    # Group experiences by category
+    by_category = {}
+    for exp in EXPERIENCES:
+        category = exp["category"]
+        if category not in by_category:
+            by_category[category] = []
+        by_category[category].append({
+            "slug": exp["slug"],
+            "title": exp["title"],
+            "price": exp["price"],
+            "duration": exp["duration"],
+            "hero_image": exp["hero_image"],
+            "group_size": exp["group_size"],
+            "location": exp["location"]
+        })
+
+    return {
+        "title": "All Experiences",
+        "subtitle": "Wine. Chocolate. Art. Pick your sensory adventure.",
+        "categories": by_category,
+        "total_experiences": len(EXPERIENCES)
+    }
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)

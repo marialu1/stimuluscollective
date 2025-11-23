@@ -13,15 +13,27 @@ const experiences = await response.json();
     <meta name="description" content="Premium wine, chocolate, and art experiences in Basel. Small groups, expert guides, lasting memories.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Caveat:wght@700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Header -->
     <header class="header">
         <div class="container">
             <div class="header-content">
-                <h1 class="logo">Stimulus Collective</h1>
-                <a href="https://wa.me/41XXXXXXXXX" class="header-cta">Book via WhatsApp</a>
+                <a href="/" class="logo">Stimulus Collective</a>
+                <nav class="nav">
+                    <div class="nav-dropdown">
+                        <a href="/experiences">Experiences</a>
+                        <div class="dropdown-menu">
+                            <a href="/experiences">All experiences</a>
+                            <a href="/experiences#wine">Wine tours</a>
+                            <a href="/experiences#chocolate">Chocolate tours</a>
+                            <a href="/experiences#art">Art tours</a>
+                        </div>
+                    </div>
+                    <a href="/about">About</a>
+                    <a href="https://wa.me/41XXXXXXXXX" class="header-cta">Book via WhatsApp</a>
+                </nav>
             </div>
         </div>
     </header>
@@ -32,7 +44,7 @@ const experiences = await response.json();
             <div class="hero-content">
                 <h2 class="hero-title">Basel experiences that stick with you</h2>
                 <p class="hero-subtitle">Wine. Chocolate. Art. Small groups, expert guides, afternoons worth remembering.</p>
-                <a href="#experiences" class="btn btn-primary">Browse experiences</a>
+                <a href="/experiences" class="browse-link">Browse experiences →</a>
             </div>
         </div>
     </section>
@@ -40,7 +52,12 @@ const experiences = await response.json();
     <!-- Experiences Grid -->
     <section id="experiences" class="experiences">
         <div class="container">
-            <h3 class="section-title">What we offer</h3>
+            <h3 class="section-title">
+                What we offer
+                <svg class="title-underline" viewBox="0 0 240 10" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M 0 5 Q 30 3, 60 5 T 120 5 Q 150 6, 180 4 T 240 6" stroke="#B71C1C" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                </svg>
+            </h3>
 
             <div class="experience-grid">
                 {experiences.map((exp) => (
@@ -62,19 +79,202 @@ const experiences = await response.json();
         </div>
     </section>
 
+    <!-- Guest Reviews -->
+    <section class="reviews">
+        <div class="container">
+            <h3 class="section-title">
+                What guests say
+                <svg class="title-underline" viewBox="0 0 240 10" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M 0 5 Q 30 3, 60 5 T 120 5 Q 150 6, 180 4 T 240 6" stroke="#B71C1C" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                </svg>
+            </h3>
+
+            <div class="carousel-container">
+                <button class="carousel-btn carousel-prev" aria-label="Previous">‹</button>
+                <div class="carousel-track">
+                    <div class="whatsapp-message">
+                        <div class="whatsapp-header">
+                            <div class="whatsapp-contact">Sophie</div>
+                            <div class="whatsapp-time">14:32</div>
+                        </div>
+                        <div class="whatsapp-bubble">
+                            The wine tour was incredible 🍷 Our guide knew every producer personally!
+                        </div>
+                    </div>
+
+                    <div class="whatsapp-message">
+                        <div class="whatsapp-header">
+                            <div class="whatsapp-contact">Marcus</div>
+                            <div class="whatsapp-time">16:45</div>
+                        </div>
+                        <div class="whatsapp-bubble">
+                            Best chocolate I've ever tasted 🍫 Small group, zero tourist trap vibes
+                        </div>
+                    </div>
+
+                    <div class="whatsapp-message">
+                        <div class="whatsapp-header">
+                            <div class="whatsapp-contact">Ana</div>
+                            <div class="whatsapp-time">11:20</div>
+                        </div>
+                        <div class="whatsapp-bubble">
+                            Felt like exploring Basel with a friend, not a tour guide 💯
+                        </div>
+                    </div>
+
+                    <div class="whatsapp-message">
+                        <div class="whatsapp-header">
+                            <div class="whatsapp-contact">James</div>
+                            <div class="whatsapp-time">15:12</div>
+                        </div>
+                        <div class="whatsapp-bubble">
+                            The Art Basel tour changed how I see contemporary art 🎨 Brilliant
+                        </div>
+                    </div>
+
+                    <div class="whatsapp-message">
+                        <div class="whatsapp-header">
+                            <div class="whatsapp-contact">Yuki</div>
+                            <div class="whatsapp-time">13:08</div>
+                        </div>
+                        <div class="whatsapp-bubble">
+                            Worth every euro. Intimate, authentic, memorable ✨
+                        </div>
+                    </div>
+
+                    <div class="whatsapp-message">
+                        <div class="whatsapp-header">
+                            <div class="whatsapp-contact">Emma</div>
+                            <div class="whatsapp-time">10:55</div>
+                        </div>
+                        <div class="whatsapp-bubble">
+                            Finally, a tour that doesn't feel like herding sheep 😂
+                        </div>
+                    </div>
+
+                    <div class="whatsapp-message">
+                        <div class="whatsapp-header">
+                            <div class="whatsapp-contact">Luca</div>
+                            <div class="whatsapp-time">17:30</div>
+                        </div>
+                        <div class="whatsapp-bubble">
+                            Our sommelier guide was a legend 🙌 Best afternoon in Basel
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-btn carousel-next" aria-label="Next">›</button>
+            </div>
+            <div class="carousel-dots"></div>
+        </div>
+    </section>
+
+    <!-- Custom Request Section -->
+    <section class="custom-request">
+        <div class="container">
+            <div class="request-content">
+                <h2 class="request-title">Want something different?</h2>
+                <p class="request-subtitle">Tell us what you're looking for and we'll create a custom experience just for you</p>
+
+                <form class="request-form">
+                    <textarea
+                        class="request-input"
+                        placeholder="I'm looking for..."
+                        rows="4"
+                    ></textarea>
+                    <button type="submit" class="request-submit">Send request →</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <div class="footer-content">
-                <p class="footer-text">Made in Basel</p>
-                <p class="footer-links">
-                    <a href="https://wa.me/41XXXXXXXXX">WhatsApp</a>
-                    <span>·</span>
-                    <a href="mailto:hello@stimuluscollective.com">Email</a>
-                </p>
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <h4 class="footer-title">About Stimulus Collective</h4>
+                    <p class="footer-description">Small-group experiences in Basel. Wine, chocolate, and art tours led by people who actually know their stuff. Max 8 people. No megaphones.</p>
+                    <a href="/about" class="footer-link">Learn more →</a>
+                </div>
+
+                <div class="footer-links-section">
+                    <h4 class="footer-title">Experiences</h4>
+                    <ul class="footer-list">
+                        <li><a href="/experiences">All experiences</a></li>
+                        <li><a href="/experiences#wine">Wine tours</a></li>
+                        <li><a href="/experiences#chocolate">Chocolate tours</a></li>
+                        <li><a href="/experiences#art">Art tours</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-contact">
+                    <h4 class="footer-title">Get in touch</h4>
+                    <p class="footer-text">Made in Basel</p>
+                    <div class="footer-links">
+                        <a href="https://wa.me/41XXXXXXXXX">WhatsApp</a>
+                        <a href="mailto:hello@stimuluscollective.com">Email</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2025 Stimulus Collective. All rights reserved.</p>
             </div>
         </div>
     </footer>
+
+    <script>
+        // Carousel functionality
+        const track = document.querySelector('.carousel-track');
+        const messages = document.querySelectorAll('.whatsapp-message');
+        const prevBtn = document.querySelector('.carousel-prev');
+        const nextBtn = document.querySelector('.carousel-next');
+        const dotsContainer = document.querySelector('.carousel-dots');
+
+        let currentIndex = 0;
+        const totalMessages = messages.length;
+
+        // Create dots
+        for (let i = 0; i < totalMessages; i++) {
+            const dot = document.createElement('button');
+            dot.classList.add('carousel-dot');
+            if (i === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(i));
+            dotsContainer.appendChild(dot);
+        }
+
+        const dots = document.querySelectorAll('.carousel-dot');
+
+        function updateCarousel() {
+            const offset = -currentIndex * (messages[0].offsetWidth + 32);
+            track.style.transform = `translateX(${offset}px)`;
+
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentIndex);
+            });
+        }
+
+        function goToSlide(index) {
+            currentIndex = index;
+            updateCarousel();
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % totalMessages;
+            updateCarousel();
+        }
+
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + totalMessages) % totalMessages;
+            updateCarousel();
+        }
+
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+
+        // Auto-advance carousel every 5 seconds
+        setInterval(nextSlide, 5000);
+    </script>
 </body>
 </html>
 
@@ -96,8 +296,8 @@ const experiences = await response.json();
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
         font-size: 16px;
         line-height: 1.6;
-        color: #1a1a1a;
-        background: #ffffff;
+        color: #2D2A26;
+        background: #FFB3C6;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
     }
@@ -129,7 +329,7 @@ const experiences = await response.json();
         position: sticky;
         top: 0;
         z-index: 100;
-        background: rgba(255, 255, 255, 0.95);
+        background: rgba(255, 179, 198, 0.95);
         backdrop-filter: blur(10px);
         border-bottom: 1px solid rgba(0, 0, 0, 0.06);
     }
@@ -142,26 +342,94 @@ const experiences = await response.json();
     }
 
     .logo {
-        font-size: 20px;
-        font-weight: 600;
-        letter-spacing: -0.02em;
-        color: #1a1a1a;
+        font-family: 'Caveat', cursive;
+        font-size: 38px;
+        font-weight: 700;
+        letter-spacing: 0;
+        color: #B71C1C;
+        text-shadow: 0.5px 0.5px 0 #B71C1C, -0.5px -0.5px 0 #B71C1C;
+        text-decoration: none;
     }
 
-    .header-cta {
+    .nav {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+    }
+
+    .nav-dropdown {
+        position: relative;
+    }
+
+    .nav a {
         font-size: 15px;
         font-weight: 500;
-        color: #1a1a1a;
-        padding: 10px 20px;
-        border: 1px solid rgba(0, 0, 0, 0.12);
-        border-radius: 8px;
+        color: #2D2A26;
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }
+
+    .nav a:hover {
+        color: #B71C1C;
+    }
+
+    .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: transparent;
+        border: none;
+        padding: 12px 0;
+        min-width: 180px;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: all 0.3s ease;
+        z-index: 1000;
+    }
+
+    .nav-dropdown:hover .dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .dropdown-menu a {
+        display: block;
+        padding: 8px 20px;
+        font-size: 14px;
+        color: #2D2A26;
         transition: all 0.2s ease;
     }
 
+    .dropdown-menu a:hover {
+        color: #B71C1C;
+    }
+
+    .header-cta {
+        font-family: 'Caveat', cursive;
+        font-size: 20px;
+        font-weight: 700;
+        color: #FFB3C6 !important;
+        background: #B71C1C;
+        padding: 14px 28px;
+        border: none;
+        transition: all 0.2s ease;
+        transform: rotate(-1deg);
+        position: relative;
+        clip-path: polygon(
+            2% 0%, 8% 2%, 15% 0%, 22% 3%, 30% 1%, 38% 2%, 45% 0%, 52% 3%, 60% 1%, 68% 2%, 75% 0%, 82% 3%, 90% 1%, 96% 2%, 99% 0%,
+            100% 5%, 99% 12%, 100% 20%, 98% 28%, 100% 35%, 99% 42%, 100% 50%, 98% 58%, 100% 65%, 99% 72%, 100% 80%, 98% 88%, 100% 95%,
+            96% 98%, 90% 99%, 82% 97%, 75% 100%, 68% 98%, 60% 99%, 52% 97%, 45% 100%, 38% 98%, 30% 99%, 22% 97%, 15% 100%, 8% 98%, 2% 100%, 0% 99%,
+            1% 95%, 0% 88%, 2% 80%, 0% 72%, 1% 65%, 0% 58%, 2% 50%, 0% 42%, 1% 35%, 0% 28%, 2% 20%, 0% 12%, 1% 5%
+        );
+        filter: drop-shadow(2px 3px 2px rgba(0, 0, 0, 0.2));
+    }
+
     .header-cta:hover {
-        background: #1a1a1a;
-        color: #ffffff;
-        border-color: #1a1a1a;
+        background: #8B0000;
+        transform: rotate(0.5deg) translateY(-2px);
+        filter: drop-shadow(3px 5px 4px rgba(0, 0, 0, 0.25));
     }
 
     /* ========================================================================
@@ -169,7 +437,7 @@ const experiences = await response.json();
        ======================================================================== */
     .hero {
         padding: 120px 0 80px;
-        background: linear-gradient(135deg, #fafafa 0%, #ffffff 100%);
+        background: #FFB3C6;
     }
 
     .hero-content {
@@ -177,18 +445,21 @@ const experiences = await response.json();
     }
 
     .hero-title {
-        font-size: 56px;
-        font-weight: 700;
+        font-family: 'Playfair Display', serif;
+        font-size: 72px;
+        font-weight: 900;
         line-height: 1.1;
-        letter-spacing: -0.03em;
-        color: #1a1a1a;
-        margin-bottom: 20px;
+        letter-spacing: -0.02em;
+        color: #B71C1C;
+        margin-bottom: 24px;
     }
 
     .hero-subtitle {
-        font-size: 20px;
-        line-height: 1.5;
-        color: #666;
+        font-family: 'Caveat', cursive;
+        font-size: 32px;
+        font-weight: 700;
+        line-height: 1.4;
+        color: #B71C1C;
         margin-bottom: 32px;
     }
 
@@ -197,24 +468,65 @@ const experiences = await response.json();
        ======================================================================== */
     .btn {
         display: inline-block;
-        font-size: 16px;
-        font-weight: 500;
-        padding: 14px 28px;
-        border-radius: 8px;
+        font-family: 'Caveat', cursive;
+        font-size: 24px;
+        font-weight: 700;
+        padding: 16px 32px;
         transition: all 0.2s ease;
         cursor: pointer;
         border: none;
+        text-decoration: none;
+        transform: rotate(-1deg);
+        position: relative;
+        clip-path: polygon(
+            2% 0%, 8% 2%, 15% 0%, 22% 3%, 30% 1%, 38% 2%, 45% 0%, 52% 3%, 60% 1%, 68% 2%, 75% 0%, 82% 3%, 90% 1%, 96% 2%, 99% 0%,
+            100% 5%, 99% 12%, 100% 20%, 98% 28%, 100% 35%, 99% 42%, 100% 50%, 98% 58%, 100% 65%, 99% 72%, 100% 80%, 98% 88%, 100% 95%,
+            96% 98%, 90% 99%, 82% 97%, 75% 100%, 68% 98%, 60% 99%, 52% 97%, 45% 100%, 38% 98%, 30% 99%, 22% 97%, 15% 100%, 8% 98%, 2% 100%, 0% 99%,
+            1% 95%, 0% 88%, 2% 80%, 0% 72%, 1% 65%, 0% 58%, 2% 50%, 0% 42%, 1% 35%, 0% 28%, 2% 20%, 0% 12%, 1% 5%
+        );
+        filter: drop-shadow(2px 3px 2px rgba(0, 0, 0, 0.2));
     }
 
     .btn-primary {
-        background: #1a1a1a;
-        color: #ffffff;
+        background: #B71C1C;
+        color: #FFB3C6;
     }
 
     .btn-primary:hover {
-        background: #000000;
-        transform: translateY(-1px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        background: #8B0000;
+        transform: rotate(0.5deg) translateY(-2px);
+        filter: drop-shadow(3px 5px 4px rgba(0, 0, 0, 0.25));
+    }
+
+    .browse-link {
+        font-family: 'Caveat', cursive;
+        font-size: 28px;
+        font-weight: 700;
+        color: #B71C1C;
+        text-decoration: none;
+        position: relative;
+        display: inline-block;
+        transition: all 0.2s ease;
+    }
+
+    .browse-link::after {
+        content: '';
+        position: absolute;
+        bottom: 4px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: #B71C1C;
+        transform: scaleX(1);
+        transition: transform 0.2s ease;
+    }
+
+    .browse-link:hover {
+        transform: translateX(4px);
+    }
+
+    .browse-link:hover::after {
+        transform: scaleX(1.1);
     }
 
     /* ========================================================================
@@ -225,11 +537,24 @@ const experiences = await response.json();
     }
 
     .section-title {
-        font-size: 32px;
-        font-weight: 600;
-        letter-spacing: -0.02em;
-        color: #1a1a1a;
+        font-family: 'Caveat', cursive;
+        font-size: 52px;
+        font-weight: 700;
+        letter-spacing: 0;
+        color: #B71C1C;
         margin-bottom: 48px;
+        position: relative;
+        display: inline-block;
+    }
+
+    .title-underline {
+        position: absolute;
+        bottom: -4px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 160%;
+        height: 10px;
+        opacity: 0.85;
     }
 
     .experience-grid {
@@ -240,17 +565,20 @@ const experiences = await response.json();
 
     .experience-card {
         display: block;
-        border-radius: 12px;
-        overflow: hidden;
-        background: #ffffff;
-        border: 1px solid rgba(0, 0, 0, 0.06);
+        background: #FFFAF8;
+        border: none;
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        clip-path: polygon(
+            0% 2%, 2% 0%, 98% 0%, 100% 2%,
+            100% 98%, 98% 100%, 2% 100%, 0% 98%
+        );
+        filter: drop-shadow(3px 4px 6px rgba(183, 28, 28, 0.15));
     }
 
     .experience-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
-        border-color: rgba(0, 0, 0, 0.12);
+        transform: translateY(-6px) rotate(-1deg);
+        filter: drop-shadow(5px 8px 12px rgba(183, 28, 28, 0.2));
     }
 
     .experience-image {
@@ -258,6 +586,9 @@ const experiences = await response.json();
         aspect-ratio: 4 / 3;
         overflow: hidden;
         background: #f5f5f5;
+        clip-path: polygon(
+            0% 0%, 100% 0%, 100% 100%, 0% 100%
+        );
     }
 
     .experience-image img {
@@ -273,17 +604,18 @@ const experiences = await response.json();
 
     .experience-category {
         position: absolute;
-        top: 16px;
-        left: 16px;
-        font-size: 12px;
-        font-weight: 500;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        padding: 6px 12px;
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
-        border-radius: 6px;
-        color: #1a1a1a;
+        top: 12px;
+        left: 12px;
+        font-family: 'Caveat', cursive;
+        font-size: 18px;
+        font-weight: 700;
+        padding: 4px 14px;
+        background: #FFB3C6;
+        color: #B71C1C;
+        transform: rotate(-2deg);
+        border: 2px solid #B71C1C;
+        border-radius: 3px;
+        box-shadow: 2px 2px 0 rgba(183, 28, 28, 0.3);
     }
 
     .experience-content {
@@ -291,11 +623,13 @@ const experiences = await response.json();
     }
 
     .experience-title {
-        font-size: 20px;
-        font-weight: 600;
-        letter-spacing: -0.01em;
-        color: #1a1a1a;
+        font-family: 'Caveat', cursive;
+        font-size: 28px;
+        font-weight: 700;
+        letter-spacing: 0;
+        color: #B71C1C;
         margin-bottom: 12px;
+        line-height: 1.2;
     }
 
     .experience-meta {
@@ -310,47 +644,329 @@ const experiences = await response.json();
     }
 
     .experience-price {
+        font-family: 'Caveat', cursive;
+        font-size: 22px;
+        font-weight: 700;
+        color: #B71C1C;
+    }
+
+    /* ========================================================================
+       REVIEWS SECTION
+       ======================================================================== */
+    .reviews {
+        padding: 120px 0;
+        background: #FFB3C6;
+        overflow: hidden;
+    }
+
+    .carousel-container {
+        position: relative;
+        max-width: 800px;
+        margin: 60px auto 0;
+        overflow: hidden;
+        padding: 0 60px;
+    }
+
+    .carousel-track {
+        display: flex;
+        gap: 32px;
+        transition: transform 0.5s ease;
+    }
+
+    .whatsapp-message {
+        flex-shrink: 0;
+        background: #FFFFFF;
+        width: 100%;
+        max-width: 400px;
+        padding: 16px;
+        border-radius: 16px;
+        box-shadow:
+            0 4px 12px rgba(0, 0, 0, 0.1),
+            0 8px 24px rgba(0, 0, 0, 0.05);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        margin: 0 auto;
+    }
+
+    .carousel-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: #B71C1C;
+        color: white;
+        border: none;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        font-size: 28px;
+        cursor: pointer;
+        z-index: 10;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 1;
+    }
+
+    .carousel-btn:hover {
+        background: #8B0000;
+        transform: translateY(-50%) scale(1.1);
+    }
+
+    .carousel-prev {
+        left: 0;
+    }
+
+    .carousel-next {
+        right: 0;
+    }
+
+    .carousel-dots {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 32px;
+    }
+
+    .carousel-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: rgba(183, 28, 28, 0.3);
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .carousel-dot.active {
+        background: #B71C1C;
+        transform: scale(1.3);
+    }
+
+    .whatsapp-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid #E0E0E0;
+    }
+
+    .whatsapp-contact {
+        font-size: 14px;
         font-weight: 600;
-        color: #1a1a1a;
+        color: #075E54;
+    }
+
+    .whatsapp-time {
+        font-size: 11px;
+        color: #999;
+    }
+
+    .whatsapp-bubble {
+        background: #DCF8C6;
+        padding: 10px 12px;
+        border-radius: 8px;
+        font-size: 15px;
+        line-height: 1.5;
+        color: #2D2A26;
+        position: relative;
+    }
+
+    .whatsapp-bubble::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        right: -8px;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 0 0 12px 8px;
+        border-color: transparent transparent #DCF8C6 transparent;
+    }
+
+    /* ========================================================================
+       CUSTOM REQUEST
+       ======================================================================== */
+    .custom-request {
+        padding: 100px 0;
+        background: #FFB3C6;
+    }
+
+    .request-content {
+        max-width: 700px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .request-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 48px;
+        font-weight: 900;
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+        color: #B71C1C;
+        margin-bottom: 16px;
+    }
+
+    .request-subtitle {
+        font-size: 18px;
+        line-height: 1.6;
+        color: #2D2A26;
+        margin-bottom: 40px;
+    }
+
+    .request-form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .request-input {
+        font-family: 'Inter', sans-serif;
+        font-size: 16px;
+        padding: 20px;
+        border: 2px solid #B71C1C;
+        border-radius: 12px;
+        background: white;
+        color: #2D2A26;
+        resize: vertical;
+        transition: all 0.2s ease;
+    }
+
+    .request-input:focus {
+        outline: none;
+        border-color: #B71C1C;
+        box-shadow: 0 0 0 3px rgba(183, 28, 28, 0.1);
+    }
+
+    .request-input::placeholder {
+        color: #999;
+    }
+
+    .request-submit {
+        font-family: 'Caveat', cursive;
+        font-size: 28px;
+        font-weight: 700;
+        color: #B71C1C;
+        background: transparent;
+        padding: 0;
+        border: none;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        align-self: center;
+        position: relative;
+        text-decoration: none;
+    }
+
+    .request-submit::after {
+        content: '';
+        position: absolute;
+        bottom: 4px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: #B71C1C;
+    }
+
+    .request-submit:hover {
+        transform: translateX(4px);
+        color: #8B0000;
+    }
+
+    .request-submit:hover::after {
+        background: #8B0000;
     }
 
     /* ========================================================================
        FOOTER
        ======================================================================== */
     .footer {
-        border-top: 1px solid rgba(0, 0, 0, 0.06);
-        padding: 48px 0;
-        background: #fafafa;
+        background: #FFB3C6;
+        padding: 60px 0 24px;
+        border-top: none;
     }
 
-    .footer-content {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+    .footer-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: 48px;
+        margin-bottom: 48px;
+    }
+
+    .footer-title {
+        font-family: 'Caveat', cursive;
+        font-size: 28px;
+        font-weight: 700;
+        color: #B71C1C;
+        margin-bottom: 16px;
+    }
+
+    .footer-description {
+        color: #666;
+        line-height: 1.6;
+        margin-bottom: 16px;
+    }
+
+    .footer-link {
+        font-family: 'Caveat', cursive;
+        font-size: 20px;
+        font-weight: 700;
+        color: #B71C1C;
+        text-decoration: none;
+        transition: transform 0.2s ease;
+        display: inline-block;
+    }
+
+    .footer-link:hover {
+        transform: translateX(4px);
+    }
+
+    .footer-list {
+        list-style: none;
+    }
+
+    .footer-list li {
+        margin-bottom: 8px;
+    }
+
+    .footer-list a {
+        color: #666;
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }
+
+    .footer-list a:hover {
+        color: #B71C1C;
     }
 
     .footer-text {
         font-size: 14px;
         color: #666;
+        margin-bottom: 12px;
     }
 
     .footer-links {
-        font-size: 14px;
-        color: #666;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
     }
 
     .footer-links a {
-        color: #1a1a1a;
+        color: #666;
+        text-decoration: none;
         transition: color 0.2s ease;
     }
 
     .footer-links a:hover {
-        color: #000;
+        color: #B71C1C;
     }
 
-    .footer-links span {
-        margin: 0 8px;
-        opacity: 0.3;
+    .footer-bottom {
+        text-align: center;
+        padding-top: 24px;
+        border-top: 1px solid rgba(0, 0, 0, 0.06);
+        color: #999;
+        font-size: 14px;
     }
 
     /* ========================================================================
@@ -362,15 +978,15 @@ const experiences = await response.json();
         }
 
         .hero-title {
-            font-size: 40px;
+            font-size: 48px;
         }
 
         .hero-subtitle {
-            font-size: 18px;
+            font-size: 26px;
         }
 
         .section-title {
-            font-size: 28px;
+            font-size: 40px;
         }
 
         .experience-grid {
@@ -378,10 +994,21 @@ const experiences = await response.json();
             gap: 24px;
         }
 
-        .footer-content {
-            flex-direction: column;
-            gap: 16px;
-            text-align: center;
+        .reviews-container {
+            min-height: 900px;
+        }
+
+        .review-note {
+            position: relative;
+            left: 0 !important;
+            top: 0 !important;
+            margin-bottom: 24px;
+            width: 100%;
+        }
+
+        .footer-grid {
+            grid-template-columns: 1fr;
+            gap: 32px;
         }
 
         .header-content {
@@ -404,7 +1031,11 @@ const experiences = await response.json();
         }
 
         .hero-title {
-            font-size: 32px;
+            font-size: 36px;
+        }
+
+        .hero-subtitle {
+            font-size: 22px;
         }
 
         .btn {

@@ -1,70 +1,133 @@
 """
-UX/UI Designer Worker
-Analyzes user experience and generates improvement recommendations.
+UX/UI Designer Worker - Enhanced with brand context and multi-step reasoning
 """
 
 import dspy
 from typing import List, Dict
 
-class UXAnalysis(dspy.Signature):
-    """Analyze user experience and generate improvement recommendations for travel/experience websites.
+class UXAnalysisStep1(dspy.Signature):
+    """First step: Deep analysis of current state with brand context.
 
-    Best Practices Integrated:
-    - Mobile-first design (58.67% of traffic is mobile)
-    - Visual hierarchy using F/Z patterns
-    - Simplified navigation with clear CTAs
-    - 3-click booking principle
-    - WCAG accessibility compliance
-    - Nielsen Norman Group principles
-    - Don't Make Me Think (Steve Krug)
+    Brand Context - Stimulus Collective:
+    - Boutique experience company in Basel, Switzerland
+    - Handmade, artisanal aesthetic (baby pink #FFB3C6, wine red #B71C1C)
+    - Small groups (max 8 people), expert guides
+    - Wine, chocolate, and art tours
+    - Target: sophisticated travelers who value authenticity over tourist traps
+    - Voice: warm, confident, unpretentious
+    - NOT crafty/DIY - tasteful artisanal
 
-    Focus: Authentic, professional design - NOT crafty/gimmicky.
+    Design Philosophy:
+    - Clean + personality (not clinical, not cluttered)
+    - Handwritten accents (Caveat font) + elegant serif (Playfair Display)
+    - Ripped paper effects (subtle, not overdone)
+    - WhatsApp-first booking (European convenience)
     """
 
-    page_type: str = dspy.InputField(
-        desc="Type of page: homepage, experience_detail, booking, corporate, about"
+    page_type: str = dspy.InputField()
+    current_layout: str = dspy.InputField()
+    user_behavior_data: str = dspy.InputField()
+    device_breakdown: str = dspy.InputField()
+
+    # Deep analysis outputs
+    what_works: List[str] = dspy.OutputField(
+        desc="What's already good and aligns with brand. Be specific."
     )
-    current_layout: str = dspy.InputField(
-        desc="Description of current page structure, elements, and user flow"
+    critical_issues: List[str] = dspy.OutputField(
+        desc="Deal-breakers that hurt conversions or trust. Evidence-based."
     )
-    user_behavior_data: str = dspy.InputField(
-        desc="Analytics data: heatmaps, scroll depth, click patterns, drop-off points (or 'No data yet' for new sites)"
+    brand_misalignments: List[str] = dspy.OutputField(
+        desc="Elements that contradict the artisanal-but-sophisticated positioning"
     )
-    device_breakdown: str = dspy.InputField(
-        desc="Traffic by device type: mobile %, desktop %, tablet %"
+    missed_opportunities: List[str] = dspy.OutputField(
+        desc="Low-hanging fruit we're not leveraging"
     )
 
-    issues_found: List[str] = dspy.OutputField(
-        desc="List of specific UX problems identified with evidence. Be critical but constructive. Point out things that feel amateurish, gimmicky, or try-hard."
+class UXAnalysisStep2(dspy.Signature):
+    """Second step: Solution brainstorming with specific examples."""
+
+    analysis: str = dspy.InputField(desc="Results from step 1")
+
+    # Solution generation
+    quick_wins: List[Dict[str, str]] = dspy.OutputField(
+        desc="List of dicts with 'change' and 'impact' keys. Changes that take <1 hour but move the needle."
     )
-    recommendations: List[str] = dspy.OutputField(
-        desc="Actionable improvements with rationale and expected impact. Focus on professional, clean design. Reference real examples from successful experience/travel sites (Airbnb Experiences, GetYourGuide, Viator)."
+    major_improvements: List[Dict[str, str]] = dspy.OutputField(
+        desc="Bigger changes with high ROI. Include 'change', 'why', 'example' (reference real sites)"
     )
-    mobile_specific_fixes: List[str] = dspy.OutputField(
-        desc="Mobile-first optimizations needed. Be specific about touch targets, thumb zones, load times."
+    mobile_optimizations: List[Dict[str, str]] = dspy.OutputField(
+        desc="Mobile-specific fixes with 'issue', 'fix', 'metric_impact'"
     )
-    accessibility_issues: List[str] = dspy.OutputField(
-        desc="WCAG compliance problems and fixes. Check contrast ratios, keyboard navigation, screen reader compatibility."
+    accessibility_fixes: List[Dict[str, str]] = dspy.OutputField(
+        desc="WCAG issues with 'problem', 'solution', 'compliance_level' (A/AA/AAA)"
+    )
+
+class UXAnalysisStep3(dspy.Signature):
+    """Third step: Prioritization and action plan."""
+
+    solutions: str = dspy.InputField(desc="Results from step 2")
+
+    # Prioritized action plan
+    do_now: List[str] = dspy.OutputField(
+        desc="Top 3 changes to implement immediately (high impact, low effort)"
+    )
+    do_next: List[str] = dspy.OutputField(
+        desc="Next 5 improvements for the roadmap"
+    )
+    do_later: List[str] = dspy.OutputField(
+        desc="Nice-to-haves for future iterations"
+    )
+    avoid: List[str] = dspy.OutputField(
+        desc="Common mistakes to avoid (over-decoration, feature creep, etc.)"
     )
     priority_score: float = dspy.OutputField(
-        desc="Overall priority score 1-10 based on user impact (1=low, 10=critical)"
+        desc="Overall urgency 1-10 (1=polish, 10=broken)"
     )
 
-
 class UXDesignerWorker(dspy.Module):
-    """UX/UI Designer AI Worker using Chain of Thought reasoning."""
+    """Enhanced UX Designer with multi-step reasoning and brand awareness."""
 
     def __init__(self):
         super().__init__()
-        self.analyze = dspy.ChainOfThought(UXAnalysis)
+        self.step1 = dspy.ChainOfThought(UXAnalysisStep1)
+        self.step2 = dspy.ChainOfThought(UXAnalysisStep2)
+        self.step3 = dspy.ChainOfThought(UXAnalysisStep3)
 
     def forward(self, page_type: str, current_layout: str,
                 user_behavior_data: str = "No data yet",
                 device_breakdown: str = "mobile: 60%, desktop: 35%, tablet: 5%"):
-        result = self.analyze(
+
+        # Step 1: Deep analysis
+        analysis = self.step1(
             page_type=page_type,
             current_layout=current_layout,
             user_behavior_data=user_behavior_data,
             device_breakdown=device_breakdown
         )
-        return result
+
+        # Step 2: Solution generation
+        analysis_summary = f"""
+        What works: {analysis.what_works}
+        Critical issues: {analysis.critical_issues}
+        Brand misalignments: {analysis.brand_misalignments}
+        Missed opportunities: {analysis.missed_opportunities}
+        """
+
+        solutions = self.step2(analysis=analysis_summary)
+
+        # Step 3: Prioritization
+        solutions_summary = f"""
+        Quick wins: {solutions.quick_wins}
+        Major improvements: {solutions.major_improvements}
+        Mobile optimizations: {solutions.mobile_optimizations}
+        Accessibility fixes: {solutions.accessibility_fixes}
+        """
+
+        action_plan = self.step3(solutions=solutions_summary)
+
+        # Combine all results
+        return {
+            "analysis": analysis,
+            "solutions": solutions,
+            "action_plan": action_plan
+        }
